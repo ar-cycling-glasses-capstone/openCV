@@ -1,5 +1,8 @@
 import cv2
-
+import csv
+import collections
+import numpy as np
+from tracker import *
 
 scale_factor = 1.2
 min_neighbors = 3
