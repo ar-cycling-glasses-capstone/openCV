@@ -1,14 +1,11 @@
 import cv2
-import csv
-import collections
-import numpy as np
-from tracker import *
+
 
 scale_factor = 1.2
 min_neighbors = 3
 min_size = (50, 50)
 # Load the cascade
-body_class=cv2.CascadeClassifier("haarcascade_frontalface_default.xml") #swap out with wwhatever being tracked
+body_class=cv2.CascadeClassifier("haarcascade_frontalface_default.xml") # swap out with wwhatever being tracked
 
 # To capture video from webcam. 
 cap = cv2.VideoCapture(0)
@@ -27,7 +24,7 @@ while cap.isOpened():
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
     # Display the resulting frame
         
-    cv2.imshow("body detection", frame)
+    cv2.imshow("face detection", frame)
     
     if cv2.waitKey(1)& 0xFF == ord('q'): #press q on keyboard to quit
         break
