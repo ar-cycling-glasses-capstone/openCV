@@ -25,13 +25,15 @@ def detect_cars_and_pedestrain(frame):
     return frame
 
 def Simulator():
-    CarVideo = cv2.VideoCapture('cars.mp4', cv2.IMREAD_GRAYSCALE)
+    CarVideo = cv2.VideoCapture('cars.mp4')
+    
     
     while CarVideo.isOpened():
         ret, frame = CarVideo.read()
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)#conv to grayscale for faster processing 
         controlkey = cv2.waitKey(1)
         if ret:        
-            cars_frame = detect_cars_and_pedestrain(frame)
+            cars_frame = detect_cars_and_pedestrain(gray)
             cv2.imshow('frame', cars_frame)
         else:
             break
