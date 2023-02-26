@@ -15,9 +15,9 @@ def detect_cars_and_pedestrain(frame):
         #cv2.rectangle(frame, (x, y), (x+w, y+h), color=(0, 255, 0), thickness=2)
         if x<distanceCutoff:
             print("too close")
-            cv2.circle(frame, (x+1, y+1), (x+w,y+h), color=(275,7,75), thickness=5)
+            cv2.rectangle(frame, (x+1, y+1), (x+w,y+h), color=(275,7,75), thickness=5)
         else:
-            cv2.rectangle(frame, (x+1, y+1), (x+w,y+h), color=:(), thickness=2)
+            cv2.rectangle(frame, (x+1, y+1), (x+w,y+h), color=(275,7,75), thickness=2)
             
     '''for(x, y, w, h) in pedistrain:
         cv2.rectangle(frame, (x, y), (x+w, y+h), color=(0, 255, 255), thickness=2) '''
@@ -25,7 +25,8 @@ def detect_cars_and_pedestrain(frame):
     return frame
 
 def Simulator():
-    CarVideo = cv2.VideoCapture('cars.mp4')
+    CarVideo = cv2.VideoCapture('cars.mp4', cv2.IMREAD_GRAYSCALE)
+    
     while CarVideo.isOpened():
         ret, frame = CarVideo.read()
         controlkey = cv2.waitKey(1)
