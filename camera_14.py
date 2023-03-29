@@ -64,8 +64,8 @@ def process_camera_frame():
 while(1):
     ret = process_camera_frame()
     if ret == 0:
-        print(’Left direction is preferred’);
+        print("Left direction is preferred");
     elif ret == 1:
-        print(’Forward direction is preferred’);
+        print("Forward direction is preferred’");
     elif ret == 2:
-        print(’Right direction is preferred
+        print("Right direction is preferred")
