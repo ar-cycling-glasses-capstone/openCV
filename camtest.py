@@ -15,9 +15,9 @@ scale = 2
 def detect_fist(frame):
 	fist = hand_cascade.detectMultiScale(frame, 1, 400)
 	for (x, y, w, h) in fist:
-    	cv2.rectangle(frame, (x+1, y+1), (x+w,y+h), color=(275,7,75), thickness=5)
-    	dist = scale *(x/y)
-     	cv.PutText(frame,("Distance = "+str(dist)), (x,y),font, 255) #Draw the text
+		cv2.rectangle(frame, (x+1, y+1), (x+w,y+h), color=(275,7,75), thickness=5)
+		dist = scale *(x/y)
+		cv2.PutText(frame,("Distance = "+str(dist)), (x,y),font, 255) #Draw the text
       
       
 while(True):
