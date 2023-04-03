@@ -5,7 +5,7 @@ scale_factor = 1.2
 min_neighbors = 3
 min_size = (50, 50)
 # Load the cascade
-body_class=cv2.CascadeClassifier("models/palm.xml") # swap out with wwhatever being tracked
+body_class=cv2.CascadeClassifier("models/closed_frontal_palm.xml") # swap out with wwhatever being tracked
 
 # To capture video from webcam. 
 cap = cv2.VideoCapture(0)
@@ -18,6 +18,7 @@ color = (0, 0, 255)
   
 # Line thickness of 2 px
 thickness = 2
+ratio = 4/(100*124)
   
 scale = 2
 while cap.isOpened():
@@ -32,8 +33,11 @@ while cap.isOpened():
         # Draw a rectangle around it
         for (x, y, w, h) in bodies:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            cv2.putText(frame,("Distance = "+str(x)), (x,y),font, fontScale,
+            cv2.putText(frame,("Distance [cm] = "+str(int(w*h*ratio))), (x,y),font, fontScale,
                   color, thickness, cv2.LINE_AA, True) #Draw the text
+            
+            
+            
     # Display the resulting frame
         
     cv2.imshow("face detection", frame)
