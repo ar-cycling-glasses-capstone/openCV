@@ -5,7 +5,7 @@ scale_factor = 1.2
 min_neighbors = 3
 min_size = (50, 50)
 # Load the cascade
-body_class=cv2.CascadeClassifier("models/closed_frontal_palm.xml") # swap out with wwhatever being tracked
+body_class=cv2.CascadeClassifier("models/fist.xml") # swap out with wwhatever being tracked
 
 # To capture video from webcam. 
 cap = cv2.VideoCapture(0)
