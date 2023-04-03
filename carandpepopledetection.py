@@ -4,10 +4,10 @@ import numpy as np
 #import imutils
 
 
-carsFront_cascade = cv2.CascadeClassifier('cars2.xml')
-carsBack_cascade = cv2.CascadeClassifier('cars.xml')
-body_cascade = cv2.CascadeClassifier('fullbody.xml')
-people_cascade = cv2.CascadeClassifier('pedestrian.xml')
+carsFront_cascade = cv2.CascadeClassifier('models/cars2.xml')
+carsBack_cascade = cv2.CascadeClassifier('models/cars.xml')
+body_cascade = cv2.CascadeClassifier('models/fullbody.xml')
+people_cascade = cv2.CascadeClassifier('models/pedestrian.xml')
 distanceCutoff = 100
 
 def detect_cars_and_pedestrain(frame):

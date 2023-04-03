@@ -6,13 +6,22 @@ import numpy as np
 import imutils
 
 
-hand_cascade = cv2.CascadeClassifier('fist.xml')
+hand_cascade = cv2.CascadeClassifier('models/fist.xml')
 scale_factor = 1.2
 min_neighbors = 3
 min_size = (50, 50)
 # define a video capture object
-vid = cv2.VideoCapture(-1)
-
+vid = cv2.VideoCapture(0)
+# fontScale
+fontScale = 1
+# font
+font = cv2.FONT_HERSHEY_SIMPLEX
+# Red color in BGR
+color = (0, 0, 255)
+  
+# Line thickness of 2 px
+thickness = 2
+  
 scale = 2
 '''def detect_fist(frame):
 	fist = hand_cascade.detectMultiScale(frame,gray, scaleFactor=scale_factor, minNeighbors=min_neighbors,minSize=min_size)
@@ -34,13 +43,15 @@ while vid.isOpened():
 	gray = cv2.GaussianBlur(gray, (5, 5), 0)
 	edged = cv2.Canny(gray, 35, 125)
 	controlkey = cv2.waitKey(1)
+
 	#fist = hand_cascade.detectMultiScale(frame,gray, 1,4)
 	fist = hand_cascade.detectMultiScale(frame,gray, scaleFactor=scale_factor, minNeighbors=min_neighbors,minSize=min_size)	
 	if len(fist)>=0:
 		for (x,y,w,h) in fist:
 			cv2.rectangle(frame, (x+1, y+1), (x+w,y+h), color=(275,7,75), thickness=5)
 			dist = scale *(x/y)
-			cv2.PutText(frame,("Distance = "+str(dist)), (x,y),font, 255) #Draw the text
+			cv2.PutText(frame,("Distance = "+str(dist)), (x,y),font, fontScale,
+                  color, thickness, cv2.LINE_AA, True) #Draw the text
 		# find the contours in the edged image and keep the largest one;
 		# we'll assume that this is our piece of paper in the image
 		'''cnts = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
