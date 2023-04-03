@@ -5,7 +5,7 @@ scale_factor = 1.2
 min_neighbors = 3
 min_size = (50, 50)
 # Load the cascade
-body_class=cv2.CascadeClassifier("models/fist.xml") # swap out with wwhatever being tracked
+body_class=cv2.CascadeClassifier("models/palm.xml") # swap out with wwhatever being tracked
 
 # To capture video from webcam. 
 cap = cv2.VideoCapture(0)
@@ -18,7 +18,7 @@ color = (0, 0, 255)
   
 # Line thickness of 2 px
 thickness = 2
-ratio = 4/(100*124)
+ratio = 10/(10*124)
   
 scale = 2
 while cap.isOpened():
