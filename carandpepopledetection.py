@@ -1,7 +1,7 @@
 import cv2
-from imutils import paths
+#from imutils import paths
 import numpy as np
-import imutils
+#import imutils
 
 
 carsFront_cascade = cv2.CascadeClassifier('cars2.xml')
@@ -46,9 +46,9 @@ def distance_to_camera(knownWidth, focalLength, perWidth):
 
 
 def Simulator():
-    #CarVideo = cv2.VideoCapture('cars.mp4')
+    CarVideo = cv2.VideoCapture('cars.mp4')
     #take input from Camera
-    CarVideo = cv2.VideoCapture(-1)
+    #CarVideo = cv2.VideoCapture(-1)
     
     while CarVideo.isOpened():
         ret, frame = CarVideo.read()
