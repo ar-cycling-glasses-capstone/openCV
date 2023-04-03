@@ -7,20 +7,22 @@ import imutils
 
 
 hand_cascade = cv2.CascadeClassifier('fist.xml')
-
+scale_factor = 1.2
+min_neighbors = 3
+min_size = (50, 50)
 # define a video capture object
 vid = cv2.VideoCapture(-1)
 
 scale = 2
-def detect_fist(frame):
-	fist = hand_cascade.detectMultiScale(frame, 1, 400)
+'''def detect_fist(frame):
+	fist = hand_cascade.detectMultiScale(frame,gray, scaleFactor=scale_factor, minNeighbors=min_neighbors,minSize=min_size)
 	for (x, y, w, h) in fist:
 		cv2.rectangle(frame, (x+1, y+1), (x+w,y+h), color=(275,7,75), thickness=5)
 		dist = scale *(x/y)
-		cv2.PutText(frame,("Distance = "+str(dist)), (x,y),font, 255) #Draw the text
+		cv2.PutText(frame,("Distance = "+str(dist)), (x,y),font, 255) #Draw the text'''
       
       
-while(True):
+while vid.isOpened():
 	
 	# Capture the video frame
 	# by frame
@@ -32,18 +34,25 @@ while(True):
 	gray = cv2.GaussianBlur(gray, (5, 5), 0)
 	edged = cv2.Canny(gray, 35, 125)
 	controlkey = cv2.waitKey(1)
-	# find the contours in the edged image and keep the largest one;
-	# we'll assume that this is our piece of paper in the image
-	cnts = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-	cnts = imutils.grab_contours(cnts)
-	c = max(cnts, key = cv2.contourArea)
-	# compute the bounding box of the of the paper region and return it
-	print(cv2.minAreaRect(c))
-	if ret:        
-		hand_frame = detect_fist(frame)
-		cv2.imshow('frame', hand_frame)
-	else:
-		break
+	#fist = hand_cascade.detectMultiScale(frame,gray, 1,4)
+	fist = hand_cascade.detectMultiScale(frame,gray, scaleFactor=scale_factor, minNeighbors=min_neighbors,minSize=min_size)	
+	if len(fist)>=0:
+		for (x,y,w,h) in fist:
+			cv2.rectangle(frame, (x+1, y+1), (x+w,y+h), color=(275,7,75), thickness=5)
+			dist = scale *(x/y)
+			cv2.PutText(frame,("Distance = "+str(dist)), (x,y),font, 255) #Draw the text
+		# find the contours in the edged image and keep the largest one;
+		# we'll assume that this is our piece of paper in the image
+		'''cnts = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+		cnts = imutils.grab_contours(cnts)
+		c = max(cnts, key = cv2.contourArea)
+		# compute the bounding box of the of the paper region and return it
+		print(cv2.minAreaRect(c))
+		if ret:        
+			hand_frame = detect_fist(frame)
+			cv2.imshow('frame', hand_frame)
+		else:
+			break'''
 	if controlkey == ord('q'):
 		break
 	# the 'q' button is set as the
