@@ -53,7 +53,7 @@ def detect_cars_and_pedestrain(frame):
         peopleDetected = True
         peoples+=1
         #cv2.rectangle(frame, (x, y), (x+w, y+h), color=(0, 255, 255), thickness=2) 
-    return peopleDetected, peoples, carDetected, cars
+    return peopleDetected, peoples, carDetected, cars, frame
    
 
 def distance_to_camera(knownWidth, focalLength, perWidth):
@@ -71,9 +71,9 @@ def Simulator():
         controlkey = cv2.waitKey(1)
         if ret:
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)#conv to grayscale        
-            cars_frame = detect_cars_and_pedestrain(frame)
+            peopleDetected, peoples, carDetected, cars, cars_frame = detect_cars_and_pedestrain(frame)
             schedule.every(pollingrate).seconds.do(detect_cars_and_pedestrain, gray)
-            #cv2.imshow('frame',cars_frame)
+            cv2.imshow('frame',cars_frame)
             
             
             
