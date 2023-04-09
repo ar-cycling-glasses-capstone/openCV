@@ -46,26 +46,18 @@ def distance_to_camera(knownWidth, focalLength, perWidth):
 
 
 def Simulator():
-    CarVideo = cv2.VideoCapture('cars.mp4')
+    #CarVideo = cv2.VideoCapture('cars.mp4')
     #take input from Camera
-    #CarVideo = cv2.VideoCapture(-1)
+    CarVideo = cv2.VideoCapture(0)
     
     while CarVideo.isOpened():
-        ret, frame = CarVideo.read()
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)#conv to grayscale for faster processing 
-        gray = cv2.GaussianBlur(gray, (5, 5), 0)
-        edged = cv2.Canny(gray, 35, 125)
+        ret,frame = CarVideo.read()
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)#conv to grayscale
         controlkey = cv2.waitKey(1)
-        # find the contours in the edged image and keep the largest one;
-        # we'll assume that this is our piece of paper in the image
-        cnts = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-        cnts = imutils.grab_contours(cnts)
-        c = max(cnts, key = cv2.contourArea)
-        # compute the bounding box of the of the paper region and return it
-        print(cv2.minAreaRect(c))
         if ret:        
-            cars_frame = detect_cars_and_pedestrain(frame)
-            cv2.imshow('frame', cars_frame)
+            cars_frame = detect_cars_and_pedestrain(gray)
+            cv2.imshow('frame',cars_frame)
+            cv2.waitKey(100)
         else:
             break
         if controlkey == ord('q'):

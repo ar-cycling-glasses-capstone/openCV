@@ -8,7 +8,7 @@ min_size = (50, 50)
 body_class=cv2.CascadeClassifier("models/palm.xml") # swap out with wwhatever being tracked
 
 # To capture video from webcam. 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 # fontScale
 fontScale = 1
 # font
