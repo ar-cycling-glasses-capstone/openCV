@@ -82,7 +82,7 @@ def Simulator():
             break
         if controlkey == ord('q'):
             break
-        people_detected, num_people, car_detected, num_cars= schedule.run_pending()
+        schedule.run_pending()
         
 
     CarVideo.release()
